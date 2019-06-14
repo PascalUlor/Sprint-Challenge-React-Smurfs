@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import Nav from './components/Nav';
 
 
 const baseUrl = 'http://localhost:3333/smurfs';
@@ -33,11 +35,22 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-      {this.state.smurfs && <div className="App">
-        <SmurfForm />
-        <Smurfs smurfs={this.state.smurfs} />
-      </div>}
+      <div className="App">
+      <Nav/>
+      <Route
+      exact 
+        path='/'
+        render={props=>this.state.smurfs && 
+        <Smurfs smurfs={this.state.smurfs} {...props}/>
+      }
+      />
+      <Route
+        path='/smurf-form'
+        render={props => this.state.smurfs &&
+        <SmurfForm {...props}/>
+      }
+      />
+      
 
       {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
       </div>
