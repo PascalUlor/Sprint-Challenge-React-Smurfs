@@ -1,11 +1,42 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Card = styled.div`
+background-color: rgba(103, 128, 159, 1);
+opacity: 0.5;
+width: 30%;
+margin: 1rem auto;
+padding: .5rem;
+`;
+
+const Span = styled.div`
+display: flex;
+justify-content: flex-end;
+margin: .5rem auto;
+span {
+  font-weight: bold;
+  color: red;
+  margin: 0 auto;
+  }
+`;
 
 const Smurf = props => {
   return (
     <div className="Smurf">
-      <h3>{props.name}</h3>
+    <Card>
+    <h3>{props.name}</h3>
       <strong>{props.height} tall</strong>
       <p>{props.age} smurf years old</p>
+      <Span>
+        <span>
+        <Link to={`/update-smurf/${props.id}`}>
+        <button>Edit</button>
+        </Link>
+        </span>
+        <span><button onClick={()=>props.DeleteSmurf(props)}>Delete</button></span>
+        </Span>
+    </Card>  
     </div>
   );
 };
