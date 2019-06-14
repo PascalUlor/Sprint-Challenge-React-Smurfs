@@ -47,7 +47,7 @@ const baseUrl = "http://localhost:3333/smurfs";
 const SmurfForm = props => {
   const { smurfs, updateSmurf} = props
   console.log("++++++",updateSmurf);
-  const id = props.match.params.id;
+  const id = Number(props.match.params.id);
   console.log(id);
   const [smurf, setSmurf] = useState({
     name: "",
@@ -74,15 +74,15 @@ const SmurfForm = props => {
     });
   };
 
-  const toUpdate = smurfs.find(smurf=> smurf.id == id)
-    console.log(toUpdate)
+  
   const updateHandler = () => {
-    
+    const selectedSmurf = smurfs.find(smurf=> smurf.id === id)
+    console.log(selectedSmurf)
     let smurfDeets = {
-      id: toUpdate.id,
-      name: smurf.name !== ''? smurf.name: toUpdate.name,
-      age: smurf.age !== ''? smurf.age: toUpdate.age,
-      height: smurf.email !== '' ? smurf.height: toUpdate.email
+      id: selectedSmurf.id,
+      name: smurf.name !== ''? smurf.name: selectedSmurf.name,
+      age: smurf.age !== ''? smurf.age: selectedSmurf.age,
+      height: smurf.height !== '' ? smurf.height: selectedSmurf.height
     };
     console.log(smurfDeets);
     updateSmurf(smurfDeets);
