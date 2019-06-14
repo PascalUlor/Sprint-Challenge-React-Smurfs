@@ -1,5 +1,69 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+height: 50rem;
+background-color: #fafafa;
+margin: 0 auto;
+margin-top: 0;
+`;
+
+const FormStyle = styled.form`
+  width: 50%;
+  margin: 5rem auto;
+  border: 2px solid lightgrey;
+  padding: 4rem;
+`;
+
+const FormInput = styled.input`
+  color: #000;
+  font-weight: 100;
+  width: 90%;
+  display: block;
+  padding: 0.5rem;
+  background-color: rgba(242, 241, 239, 1);
+  border: 2px solid rgba(242, 241, 239, 1);
+  -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+  background-position: -800px 0;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Montserrat", sans-serif;
+  margin: auto;
+  margin-bottom: 1em;
+  &:focus {
+    outline: none;
+    border:1px solid rgba(189, 195, 199, 1);
+}
+`;
+
+const SubmitBtn = styled.input`
+  font-size: 0.9em;
+  color: #fff;
+  background: lightseagreen;
+  outline: none;
+  border: 1px solid lightseagreen;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0.5em;
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 2em 0;
+  letter-spacing: 4px;
+  &:hover {
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+    transition: 0.5s all;
+    background: skyblue;
+  }
+`;
 
 const baseUrl = 'http://localhost:3333/smurfs';
 
@@ -46,29 +110,29 @@ const SmurfForm =()=> {
 
   // render() {
     return (
-      <div className="SmurfForm">
-        <form onSubmit={addSmurf}>
-          <input
+      <Container>
+        <FormStyle onSubmit={addSmurf}>
+          <FormInput
             onChange={handleInputChange}
             placeholder="name"
             value={smurf.name}
             name="name"
           />
-          <input
+          <FormInput
             onChange={handleInputChange}
             placeholder="age"
             value={smurf.age}
             name="age"
           />
-          <input
+          <FormInput
             onChange={handleInputChange}
             placeholder="height"
             value={smurf.height}
             name="height"
           />
           <button type="submit">Add to the village</button>
-        </form>
-      </div>
+        </FormStyle>
+      </Container>
     );
   // }
 }
