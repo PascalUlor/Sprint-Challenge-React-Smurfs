@@ -51,17 +51,25 @@ class App extends Component {
       console.log("---------",err);
     this.setState({errorMessage: `Something went wrong. Error: ${err}`})})
   }
+  reloadState = (data) => {
+    this.setState({
+      smurfs: data
+    })
+  }
 
-  DeleteSmurf(dataInput){
+  DeleteSmurf = (dataInput) => {
     axios.delete(`${baseUrl}/${dataInput.id}`)
     .then(res=>{
-      this.setState({smurfs: res.data});
+      this.reloadState(res.data)
       console.log("-----Working", res.data);
     }).catch(err=> {
-      console.log("---------",err);
+      console.log("---------",err)
+      .finally(() => this.props.history.push('/'))
     // this.setState({errorMessage: `Something went wrong. Error: ${err}`})
   });
 }
+
+
 
   componentDidMount() {
     this.FetchSmurfs();
@@ -76,6 +84,7 @@ class App extends Component {
           render={props =>
             this.state.smurfs && (
               <Smurfs smurfs={this.state.smurfs} {...props} DeleteSmurf={this.DeleteSmurf}
+              // reloadState={reloadState}
                />
             )
           }
@@ -88,7 +97,8 @@ class App extends Component {
         <Route
               exact
               path="/update-smurf/:id"
-              render={props => <SmurfForm smurfs={this.state.smurfs} {...props} updateSmurf={this.UpdateSmurf} />}
+              render={props => <SmurfForm smurfs={this.state.smurfs} {...props} updateSmurf={this.UpdateSmurf}
+               />}
             />
 
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
