@@ -21,7 +21,7 @@ const Header = styled.header`
 
 class Smurfs extends Component {
   render() {
-    console.log("$$$$$$$$$$", this.props.smurfs);
+    console.log(this.props)
     if (this.props.smurfs) {
       const { smurfs } = this.props;
       return (
@@ -30,15 +30,15 @@ class Smurfs extends Component {
           <ul>
             
             {smurfs.map(smurf => {
-              console.log("---------", smurf.name);
               return (
-                <div>
+                <div key={smurf.id}>
                   <Smurf
                     name={smurf.name}
                     id={smurf.id}
                     age={smurf.age}
                     height={smurf.height}
                     key={smurf.id}
+                    DeleteSmurf={this.props.DeleteSmurf}
                   />
                 </div>
               );

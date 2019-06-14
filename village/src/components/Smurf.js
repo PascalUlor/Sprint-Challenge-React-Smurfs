@@ -34,7 +34,7 @@ const Smurf = props => {
         <button>Edit</button>
         </Link>
         </span>
-        <span><button>Delete</button></span>
+        <span><button onClick={()=>props.DeleteSmurf(props)}>Delete</button></span>
         </Span>
     </Card>  
     </div>

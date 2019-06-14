@@ -46,9 +46,7 @@ const baseUrl = "http://localhost:3333/smurfs";
 
 const SmurfForm = props => {
   const { smurfs, updateSmurf} = props
-  console.log("++++++",updateSmurf);
   const id = Number(props.match.params.id);
-  console.log(id);
   const [smurf, setSmurf] = useState({
     name: "",
     age: "",
@@ -77,7 +75,6 @@ const SmurfForm = props => {
   
   const updateHandler = () => {
     const selectedSmurf = smurfs.find(smurf=> smurf.id === id)
-    console.log(selectedSmurf)
     let smurfDeets = {
       id: selectedSmurf.id,
       name: smurf.name !== ''? smurf.name: selectedSmurf.name,
@@ -94,12 +91,15 @@ const SmurfForm = props => {
     const name = target.name;
     setSmurf(smurf => ({ ...smurf, [name]: value }));
   };
+
+  const method = !id? addSmurf: updateHandler;
+  const text = !id? 'Add Smurf': 'Update Smurf';
   // render() {
   return (
     <Container>
-      {!id && (
-        <FormStyle onSubmit={addSmurf}>
-          <h1>Add Smurf</h1>
+      {/* {!id && ( */}
+        <FormStyle onSubmit={method}>
+          <h1>{text}</h1>
           <FormInput
             onChange={handleInputChange}
             placeholder="name"
@@ -120,9 +120,9 @@ const SmurfForm = props => {
           />
           <button type="submit">Add to the village</button>
         </FormStyle>
-      )}
+      {/* )} */}
 
-      {id && (
+      {/* {id && 
         <FormStyle onSubmit={updateHandler}>
           <FormInput
             onChange={handleInputChange}
@@ -144,7 +144,7 @@ const SmurfForm = props => {
           />
           <button type="submit">Update Details</button>
         </FormStyle>
-      )}
+      } */}
     </Container>
   );
   // }
