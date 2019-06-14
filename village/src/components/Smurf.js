@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Card = styled.div`
@@ -9,6 +10,17 @@ margin: 1rem auto;
 padding: .5rem;
 `;
 
+const Span = styled.div`
+display: flex;
+justify-content: flex-end;
+margin: .5rem auto;
+span {
+  font-weight: bold;
+  color: red;
+  margin: 0 auto;
+  }
+`;
+
 const Smurf = props => {
   return (
     <div className="Smurf">
@@ -16,6 +28,14 @@ const Smurf = props => {
     <h3>{props.name}</h3>
       <strong>{props.height} tall</strong>
       <p>{props.age} smurf years old</p>
+      <Span>
+        <span>
+        <Link to={`/${props.id}`}>
+        <button>Edit</button>
+        </Link>
+        </span>
+        <span><button>Delete</button></span>
+        </Span>
     </Card>  
     </div>
   );

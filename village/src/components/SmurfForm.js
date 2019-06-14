@@ -42,28 +42,6 @@ const FormInput = styled.input`
 }
 `;
 
-const SubmitBtn = styled.input`
-  font-size: 0.9em;
-  color: #fff;
-  background: lightseagreen;
-  outline: none;
-  border: 1px solid lightseagreen;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0.5em;
-  -webkit-appearance: none;
-  width: 100%;
-  margin: 2em 0;
-  letter-spacing: 4px;
-  &:hover {
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
-    -ms-transition: 0.5s all;
-    transition: 0.5s all;
-    background: skyblue;
-  }
-`;
 
 const baseUrl = 'http://localhost:3333/smurfs';
 
