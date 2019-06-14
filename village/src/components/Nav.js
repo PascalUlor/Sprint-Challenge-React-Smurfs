@@ -1,11 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
+    const highLight ={
+        fontWeight: "bold",
+        color: "red"
+      }
   return (
     <div>
-      <Link to='/'>Home</Link>
-      <Link to='/smurf-form'>Add Smurfs</Link>
+      <NavLink activeStyle={highLight} to='/'>Home</NavLink>
+      <NavLink activeStyle={highLight} to='/smurf-form'>Add Smurfs</NavLink>
     </div>
   );
 };
