@@ -43,6 +43,15 @@ class App extends Component {
       });
   }
 
+  UpdateSmurf(dataInput){
+    axios.put(`${baseUrl}/${dataInput.id}`, dataInput)
+    .then(res=>{
+      this.setState({smurfs: res.data});
+    }).catch(err=> {
+      console.log("---------",err);
+    this.setState({errorMessage: `Something went wrong. Error: ${err}`})})
+  }
+
   componentDidMount() {
     this.FetchSmurfs();
   }
@@ -60,9 +69,15 @@ class App extends Component {
           }
         />
         <Route
-          path="/smurf-form/:id?"
-          render={props => <SmurfForm {...props} />}
+          path="/smurf-form"
+          render={props => <SmurfForm foo="bar" {...props} />}
         />
+
+        <Route
+              exact
+              path="/update-smurf/:id"
+              render={props => <SmurfForm smurfs={this.state.smurfs} {...props} updateSmurf={this.UpdateSmurf} />}
+            />
 
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
       </MainContainer>

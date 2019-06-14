@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import axios from "axios";
+import styled from "styled-components";
 
 const Container = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-width: 100%;
-height: 50rem;
-background-color: #fafafa;
-margin: 0 auto;
-margin-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50rem;
+  background-color: #fafafa;
+  margin: 0 auto;
+  margin-top: 0;
 `;
 
 const FormStyle = styled.form`
@@ -38,62 +38,68 @@ const FormInput = styled.input`
   margin-bottom: 1em;
   &:focus {
     outline: none;
-    border:1px solid rgba(189, 195, 199, 1);
-}
+    border: 1px solid rgba(189, 195, 199, 1);
+  }
 `;
 
+const baseUrl = "http://localhost:3333/smurfs";
 
-const baseUrl = 'http://localhost:3333/smurfs';
-
-const SmurfForm =(props)=> {
-  console.log('++++++',props);
+const SmurfForm = props => {
+  const { smurfs, updateSmurf} = props
+  console.log("++++++",updateSmurf);
+  const id = props.match.params.id;
+  console.log(id);
   const [smurf, setSmurf] = useState({
-    name: '',
-    age: '',
-    height: ''
-  })
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     name: '',
-  //     age: '',
-  //     height: ''
-  //   };
-  // }
+    name: "",
+    age: "",
+    height: ""
+  });
+  
 
   const addSmurf = event => {
-    // event.preventDefault();
     let newSmurf = {
       name: smurf.name,
       age: smurf.age,
       height: smurf.height
-    }
+    };
     // add code to create the smurf using the api
-    axios.post(`${baseUrl}`, newSmurf)
-    .then(res=>{
-      
-    }).catch(err=> console.log(err));
+    axios
+      .post(`${baseUrl}`, newSmurf)
+      .then(res => {})
+      .catch(err => console.log(err));
     setSmurf({
-      name: '',
-      age: '',
-      height: ''
+      name: "",
+      age: "",
+      height: ""
     });
-  }
+  };
 
-
+  const toUpdate = smurfs.find(smurf=> smurf.id == id)
+    console.log(toUpdate)
+  const updateHandler = () => {
+    
+    let smurfDeets = {
+      id: toUpdate.id,
+      name: smurf.name !== ''? smurf.name: toUpdate.name,
+      age: smurf.age !== ''? smurf.age: toUpdate.age,
+      height: smurf.email !== '' ? smurf.height: toUpdate.email
+    };
+    console.log(smurfDeets);
+    updateSmurf(smurfDeets);
+  };
 
   const handleInputChange = e => {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    setSmurf(smurf=>({ ...smurf, [name]: value }));
+    setSmurf(smurf => ({ ...smurf, [name]: value }));
   };
-
   // render() {
-    const id = props.match.params.id;
-    return (
-      <Container>
+  return (
+    <Container>
+      {!id && (
         <FormStyle onSubmit={addSmurf}>
+          <h1>Add Smurf</h1>
           <FormInput
             onChange={handleInputChange}
             placeholder="name"
@@ -114,9 +120,34 @@ const SmurfForm =(props)=> {
           />
           <button type="submit">Add to the village</button>
         </FormStyle>
-      </Container>
-    );
+      )}
+
+      {id && (
+        <FormStyle onSubmit={updateHandler}>
+          <FormInput
+            onChange={handleInputChange}
+            placeholder="name"
+            value={smurf.name}
+            name="name"
+          />
+          <FormInput
+            onChange={handleInputChange}
+            placeholder="age"
+            value={smurf.age}
+            name="age"
+          />
+          <FormInput
+            onChange={handleInputChange}
+            placeholder="height"
+            value={smurf.height}
+            name="height"
+          />
+          <button type="submit">Update Details</button>
+        </FormStyle>
+      )}
+    </Container>
+  );
   // }
-}
+};
 
 export default SmurfForm;

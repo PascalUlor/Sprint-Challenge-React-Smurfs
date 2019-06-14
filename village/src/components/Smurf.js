@@ -22,7 +22,6 @@ span {
 `;
 
 const Smurf = props => {
-  console.log('======',props);
   return (
     <div className="Smurf">
     <Card>
@@ -31,7 +30,7 @@ const Smurf = props => {
       <p>{props.age} smurf years old</p>
       <Span>
         <span>
-        <Link to={`/smurf-form/${props.id}`}>
+        <Link to={`/update-smurf/${props.id}`}>
         <button>Edit</button>
         </Link>
         </span>
