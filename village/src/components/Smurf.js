@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Card = styled.div`
-background-color: red;
+background-color: rgba(103, 128, 159, 1);
 opacity: 0.5;
 width: 30%;
 margin: 1rem auto;
@@ -22,6 +22,7 @@ span {
 `;
 
 const Smurf = props => {
+  console.log('======',props);
   return (
     <div className="Smurf">
     <Card>
@@ -30,7 +31,7 @@ const Smurf = props => {
       <p>{props.age} smurf years old</p>
       <Span>
         <span>
-        <Link to={`/${props.id}`}>
+        <Link to={`/smurf-form/${props.id}`}>
         <button>Edit</button>
         </Link>
         </span>

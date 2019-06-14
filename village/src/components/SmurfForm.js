@@ -45,7 +45,8 @@ const FormInput = styled.input`
 
 const baseUrl = 'http://localhost:3333/smurfs';
 
-const SmurfForm =()=> {
+const SmurfForm =(props)=> {
+  console.log('++++++',props);
   const [smurf, setSmurf] = useState({
     name: '',
     age: '',
@@ -79,6 +80,8 @@ const SmurfForm =()=> {
     });
   }
 
+
+
   const handleInputChange = e => {
     const target = e.target;
     const value = target.value;
@@ -87,6 +90,7 @@ const SmurfForm =()=> {
   };
 
   // render() {
+    const id = props.match.params.id;
     return (
       <Container>
         <FormStyle onSubmit={addSmurf}>

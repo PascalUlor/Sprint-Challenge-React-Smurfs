@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Smurf from './Smurf';
+import SmurfForm from './SmurfForm';
 
 const Container = styled.div`
 background-color: rgba(236, 240, 241, 1);
@@ -26,6 +28,14 @@ class Smurfs extends Component {
         <ul>
           {this.props.smurfs.map(smurf => {
             return (
+              <div>
+              <Route
+                exact
+                path='/smurf-form/:id?'
+                render={props=> <SmurfForm
+                 {...props}
+                 />}
+              />
               <Smurf
                 name={smurf.name}
                 id={smurf.id}
@@ -33,6 +43,8 @@ class Smurfs extends Component {
                 height={smurf.height}
                 key={smurf.id}
               />
+              </div>
+              
             );
           })}
         </ul>
