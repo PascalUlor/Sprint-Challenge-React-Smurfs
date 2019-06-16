@@ -94,6 +94,7 @@ const SmurfForm = props => {
 
   const method = !id? addSmurf: updateHandler;
   const text = !id? 'Add Smurf': 'Update Smurf';
+  const submit = !id? 'Add to the village': 'Update Smurf';
   return (
     <Container>
         <FormStyle onSubmit={method}>
@@ -116,7 +117,7 @@ const SmurfForm = props => {
             value={smurf.height}
             name="height"
           />
-          <button type="submit">Add to the village</button>
+          <button type="submit">{submit}</button>
         </FormStyle>
     </Container>
   );
