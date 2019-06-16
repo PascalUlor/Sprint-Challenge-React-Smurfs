@@ -92,7 +92,7 @@ const SmurfForm = props => {
     setSmurf(smurf => ({ ...smurf, [name]: value }));
   };
 
-  const method = !id? addSmurf: updateHandler;
+  const method = !id? addSmurf : updateHandler;
   const text = !id? 'Add Smurf': 'Update Smurf';
   const submit = !id? 'Add to the village': 'Update Smurf';
   return (
