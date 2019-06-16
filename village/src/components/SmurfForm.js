@@ -94,10 +94,8 @@ const SmurfForm = props => {
 
   const method = !id? addSmurf: updateHandler;
   const text = !id? 'Add Smurf': 'Update Smurf';
-  // render() {
   return (
     <Container>
-      {/* {!id && ( */}
         <FormStyle onSubmit={method}>
           <h1>{text}</h1>
           <FormInput
@@ -120,34 +118,8 @@ const SmurfForm = props => {
           />
           <button type="submit">Add to the village</button>
         </FormStyle>
-      {/* )} */}
-
-      {/* {id && 
-        <FormStyle onSubmit={updateHandler}>
-          <FormInput
-            onChange={handleInputChange}
-            placeholder="name"
-            value={smurf.name}
-            name="name"
-          />
-          <FormInput
-            onChange={handleInputChange}
-            placeholder="age"
-            value={smurf.age}
-            name="age"
-          />
-          <FormInput
-            onChange={handleInputChange}
-            placeholder="height"
-            value={smurf.height}
-            name="height"
-          />
-          <button type="submit">Update Details</button>
-        </FormStyle>
-      } */}
     </Container>
   );
-  // }
 };
 
 export default SmurfForm;

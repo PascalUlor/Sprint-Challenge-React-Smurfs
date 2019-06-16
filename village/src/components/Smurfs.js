@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-// import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Smurf from "./Smurf";
-// import SmurfForm from "./SmurfForm";
 
 const Container = styled.div`
   background-color: rgba(236, 240, 241, 1);
@@ -31,6 +30,7 @@ class Smurfs extends Component {
             
             {smurfs.map(smurf => {
               return (
+                <Link key={smurf.id} to={`/smurf/${smurf.id}`}>
                 <div key={smurf.id}>
                   <Smurf
                     name={smurf.name}
@@ -41,6 +41,8 @@ class Smurfs extends Component {
                     DeleteSmurf={this.props.DeleteSmurf}
                   />
                 </div>
+                </Link>
+                
               );
             })}
           </ul>

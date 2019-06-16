@@ -6,6 +6,7 @@ import styled from "styled-components";
 import SmurfForm from "./components/SmurfForm";
 import Smurfs from "./components/Smurfs";
 import Nav from "./components/Nav";
+import SmurfDeet from "./components/SmurfDeet";
 
 const MainContainer = styled.div`
   background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent),
@@ -64,8 +65,8 @@ class App extends Component {
       console.log("-----Working", res.data);
     }).catch(err=> {
       console.log("---------",err)
+      this.setState({errorMessage: `Something went wrong. Error: ${err}`})
       .finally(() => this.props.history.push('/'))
-    // this.setState({errorMessage: `Something went wrong. Error: ${err}`})
   });
 }
 
@@ -84,7 +85,6 @@ class App extends Component {
           render={props =>
             this.state.smurfs && (
               <Smurfs smurfs={this.state.smurfs} {...props} DeleteSmurf={this.DeleteSmurf}
-              // reloadState={reloadState}
                />
             )
           }
@@ -100,6 +100,13 @@ class App extends Component {
               render={props => <SmurfForm smurfs={this.state.smurfs} {...props} updateSmurf={this.UpdateSmurf}
                />}
             />
+
+        <Route 
+          path="/smurf/:id"
+          render={props => <SmurfDeet {...props} smurfs={this.state.smurfs}
+          updateSmurf={this.UpdateSmurf} DeleteSmurf={this.DeleteSmurf}
+          />}
+        />
 
         {this.state.errorMessage && <div>{this.state.errorMessage}</div>}
       </MainContainer>
